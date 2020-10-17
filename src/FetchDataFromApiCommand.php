@@ -1,12 +1,12 @@
 <?php
 
-namespace Vendor\MyTile;
+namespace Wotta\SentryTile;
 
 use Illuminate\Console\Command;
 
 class FetchDataFromApiCommand extends Command
 {
-    protected $signature = 'dashboard:fetch-data-from-xxx-api';
+    protected $signature = 'dashboard:fetch-data-from-sentry-api';
 
     protected $description = 'Fetch data for tile';
 
@@ -16,7 +16,7 @@ class FetchDataFromApiCommand extends Command
 
         $myData = Http::get($endpoint)->json();
 
-        MyStore::make()->setData($myData);
+        SentryStore::make()->setData($myData);
 
         $this->info('All done!');
     }

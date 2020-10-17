@@ -1,17 +1,17 @@
 {
-    "name": ":vendor/:package_name",
-    "description": ":package_description",
+    "name": "wotta/sentry-dashboard-tile",
+    "description": "A sentry dashboard title that shows the latest 5 issues.",
     "keywords": [
-        ":vendor",
-        ":package_name"
+        "wotta",
+        "sentry-dashboard-tile"
     ],
-    "homepage": "https://github.com/:vendor/:package_name",
+    "homepage": "https://github.com/wotta/sentry-dashboard-tile",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": "https://:vendor.be",
+            "name": "Wouter van Marrum",
+            "email": "wouter.van.marrum@protonmail.com",
+            "homepage": "https://woutervm.com",
             "role": "Developer"
         }
     ],
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\MyTile\\": "src"
+            "Wotta\\SentryTile\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\MyTile\\Tests\\": "tests"
+            "Wotta\\SentryTile\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -43,7 +43,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\MyTile\\MyTileServiceProvider"
+                "Wotta\\SentryTitle\\SentryTileServiceProvider"
             ]
         }
     },

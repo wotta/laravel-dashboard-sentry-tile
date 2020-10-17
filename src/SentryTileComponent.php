@@ -1,10 +1,10 @@
 <?php
 
-namespace Vendor\MyTile;
+namespace Wotta\SentryTile;
 
 use Livewire\Component;
 
-class MyTileComponent extends Component
+class SentryTileComponent extends Component
 {
     public $position;
 
@@ -13,12 +13,12 @@ class MyTileComponent extends Component
     {
         $this->position = $position;
     }
-    
-    
+
+
     public function render()
     {
         return view('dashboard-skeleton-tile::tile', [
-            'myData' => MyStore::make()->getData(),
+            'myData' => SentryStore::make()->getData(),
             'refreshIntervalInSeconds' => config('dashboard.tiles.skeleton.refresh_interval_in_seconds') ?? 60,
 
         ]);

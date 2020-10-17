@@ -1,10 +1,10 @@
 <?php
 
-namespace Vendor\MyTile;
+namespace Wotta\SentryTile;
 
 use Spatie\Dashboard\Models\Tile;
 
-class MyStore
+class SentryStore
 {
     private Tile $tile;
 
