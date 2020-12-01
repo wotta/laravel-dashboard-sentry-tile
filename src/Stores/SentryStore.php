@@ -2,7 +2,6 @@
 
 namespace Wotta\SentryTile\Stores;
 
-use Carbon\Carbon;
 use Spatie\Dashboard\Models\Tile;
 use Wotta\SentryTile\Objects\Issue;
 

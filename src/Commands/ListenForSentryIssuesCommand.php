@@ -2,11 +2,9 @@
 
 namespace Wotta\SentryTile\Commands;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Console\Command;
-use Wotta\SentryTile\Objects\Issue;
-use Wotta\SentryTile\Models\Project;
 use Illuminate\Support\Facades\Http;
+use Wotta\SentryTile\Models\Project;
 use Wotta\SentryTile\Objects\QueryString;
 
 class ListenForSentryIssuesCommand extends Command
