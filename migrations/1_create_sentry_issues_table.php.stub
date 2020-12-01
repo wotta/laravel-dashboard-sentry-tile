@@ -1,0 +1,45 @@
+<?php
+
+use Wotta\SentryTile\Objects\Issue;
+use Wotta\SentryTile\Models\Project;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateSentryIssuesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('sentry_issues', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Project::class)->cascadeOnDelete();
+            $table->string('external_id');
+            $table->string('title');
+            $table->enum('status', Issue::STATUSES);
+            $table->string('type');
+            $table->string('level');
+            $table->timestamp('first_seen')->nullable();
+            $table->timestamp('last_seen')->nullable();
+            $table->string('permalink');
+            $table->json('meta');
+            $table->json('assigned_to')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('sentry_issues');
+    }
+}
