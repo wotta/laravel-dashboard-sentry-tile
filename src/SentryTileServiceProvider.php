@@ -2,12 +2,12 @@
 
 namespace Wotta\SentryTile;
 
-use Livewire\Livewire;
-use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
 
 class SentryTileServiceProvider extends ServiceProvider
@@ -30,7 +30,7 @@ class SentryTileServiceProvider extends ServiceProvider
             $filename = Str::substr($file->getFilename(), 2);
 
             $this->publishes([
-                __DIR__ . '/../migrations/' . $file->getFilename() => $this->getMigrationFileName($filesystem, Str::before($filename, '.stub'))
+                __DIR__ . '/../migrations/' . $file->getFilename() => $this->getMigrationFileName($filesystem, Str::before($filename, '.stub')),
             ], 'dashboard-sentry-migrations');
 
             sleep(1);

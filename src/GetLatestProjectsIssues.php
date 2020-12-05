@@ -2,8 +2,8 @@
 
 namespace Wotta\SentryTile;
 
-use Wotta\SentryTile\Models\Issue;
 use Illuminate\Support\Collection;
+use Wotta\SentryTile\Models\Issue;
 use Wotta\SentryTile\Objects\Issue as IssueObject;
 
 class GetLatestProjectsIssues

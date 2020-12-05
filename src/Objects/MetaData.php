@@ -2,8 +2,6 @@
 
 namespace Wotta\SentryTile\Objects;
 
-use Webmozart\Assert\Assert;
-
 class MetaData
 {
     protected array $attributes;
