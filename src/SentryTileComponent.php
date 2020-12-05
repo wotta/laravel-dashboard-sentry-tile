@@ -2,11 +2,11 @@
 
 namespace Wotta\SentryTile;
 
-use Livewire\Component;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
-use Wotta\SentryTile\Objects\Issue;
+use Illuminate\Support\Collection;
+use Livewire\Component;
 use Wotta\SentryTile\Models\Project;
+use Wotta\SentryTile\Objects\Issue;
 
 class SentryTileComponent extends Component
 {
