@@ -3,6 +3,7 @@
 namespace Wotta\SentryTile;
 
 use Livewire\Component;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use Wotta\SentryTile\Objects\Issue;
 use Wotta\SentryTile\Models\Project;
@@ -35,21 +36,33 @@ class SentryTileComponent extends Component
 
     public function render(): View
     {
-        if ($this->projectName) {
-            /** @var Project $project */
-            $project = Project::where('name', $this->projectName)->orWhere('slug', $this->projectName)->first();
-        }
-
-        if (! $this->projectName) {
-            $issues = $this->getLatestProjectIssues();
-        }
+        $issues = $this->getIssues();
 
         return view('dashboard-sentry-tile-views::tile', [
-            'issues' => $this->projectName ? $project->issues->sortByDesc('last_seen')->load('project')->mapInto(Issue::class) ?? [] : $issues,
+            'issues' => $issues ?? [],
         ]);
     }
 
-    protected function getLatestProjectIssues()
+    protected function getIssues(): Collection
+    {
+        $project = null;
+
+        if (! $this->projectName) {
+            return $this->getLatestProjectIssues();
+        }
+
+        if ($this->projectName) {
+            $project = Project::where('name', $this->projectName)->orWhere('slug', $this->projectName)->first();
+        }
+
+        if ($this->projectName && $project) {
+            return $project->issues->sortByDesc('last_seen')->sortByDesc('created_at')->load('project')->mapInto(Issue::class);
+        }
+
+        return collect([]);
+    }
+
+    protected function getLatestProjectIssues(): Collection
     {
         if (class_exists('App\Actions\GetLatestProjectsIssues')) {
             return (new App\Actions\GetLatestProjectsIssues())->handle();

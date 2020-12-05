@@ -32,7 +32,7 @@
                         <div class="grid grid-cols-auto-1 gap-2 items-center">
                             <div class="leading-tight min-w-0">
                                 <div class="truncate text-xs text-dimmed">
-                                    <p class="text-{{ $issue->level() }}">{{ $issue->level() }}</p> -
+                                    <span class="text-{{ $issue->level() }}">{{ $issue->level() }}</span> -
                                     {{ $issue->status() }} –
                                     <span title="{{ $issue->lastSeen(\Wotta\SentryTile\Objects\Issue::FORMAT) }}">{{ $issue->lastSeen() }}</span> -
                                     <a href="{{ $issue->permalink() }}" class="hover:underline">Permalink</a>

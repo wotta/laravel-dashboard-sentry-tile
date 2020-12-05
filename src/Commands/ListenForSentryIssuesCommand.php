@@ -52,10 +52,6 @@ class ListenForSentryIssuesCommand extends Command
                 if (empty($projectIssues)) {
                     return $project;
                 }
-//
-//                if ($project->slug === 'vezwolle') {
-//                    dd($projectIssues);
-//                }
 
                 return $projectIssues->map(function (array $issue) use ($project) {
                     return $project->issues()->updateOrCreate(
@@ -67,6 +63,7 @@ class ListenForSentryIssuesCommand extends Command
                             'status' => $issue['status'],
                             'type' => $issue['type'],
                             'level' => $issue['level'],
+                            'logger' => $issue['logger'],
                             'first_seen' => $issue['firstSeen'],
                             'last_seen' => $issue['lastSeen'],
                             'permalink' => $issue['permalink'],

@@ -62,6 +62,13 @@ class Issue
         return $this->attributes['level'];
     }
 
+    public function logger(): string
+    {
+        Assert::keyExists($this->attributes, 'logger');
+
+        return $this->attributes['logger'];
+    }
+
     public function firstSeen(string $format = null): string
     {
         Assert::keyExists($this->attributes, 'first_seen');
