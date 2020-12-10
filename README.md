@@ -1,10 +1,10 @@
-# A short description of the tile
+# A tile to display the issues from sentry
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wotta/sentry-dashboard-tile.svg?style=flat-square)](https://packagist.org/packages/wotta/sentry-dashboard-tile)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wotta/sentry-dashboard-tile/run-tests?label=tests)](https://github.com/wotta/sentry-dashboard-tile/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/wotta/sentry-dashboard-tile.svg?style=flat-square)](https://packagist.org/packages/wotta/sentry-dashboard-tile)
 
-A friendly explanation of what your tile does.
+This package allows you to get an overview of the latest 20 issues or get the issues from a specific project.
 
 This tile can be used on [the Laravel Dashboard](https://docs.spatie.be/laravel-dashboard).
 
@@ -22,7 +22,8 @@ In your dashboard view you use the `livewire:sentry-title` component.
 
 ```html
 <x-dashboard>
-    <livewire:sentry-title position="e7:e16" />
+    <livewire:sentry-tile position="a1:a2" title="Issues" :showMeta="true" :refresh-interval-in-seconds="30" />
+    <livewire:sentry-tile position="b1:b2" title="Issues" projectName="your-project" :showMeta="false" :refresh-interval-in-seconds="30" />
 </x-dashboard>
 ```
 
