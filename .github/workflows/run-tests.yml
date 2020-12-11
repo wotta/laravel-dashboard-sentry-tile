@@ -40,7 +40,7 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute test suite
-        uses: theomessin/action-phpcov
+        uses: theomessin/action-phpcov@master
         with:
           min_coverage: 0
           now_project: "sentry-dashboard-tile"
