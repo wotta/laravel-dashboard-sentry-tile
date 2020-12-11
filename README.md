@@ -18,7 +18,7 @@ composer require wotta/sentry-dashboard-tile
 
 ## Usage
 
-In your dashboard view you use the `livewire:sentry-title` component.
+In your dashboard view you use the `livewire:sentry-tile` component.
 
 ```html
 <x-dashboard>
