@@ -1,7 +1,7 @@
 # A tile to display the issues from sentry
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wotta/sentry-dashboard-tile.svg?style=flat-square)](https://packagist.org/packages/wotta/sentry-dashboard-tile)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wotta/sentry-dashboard-tile/run-tests?label=tests)](https://github.com/wotta/sentry-dashboard-tile/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wotta/laravel-dashboard-sentry-tile/run-tests?label=tests)](https://github.com/wotta/laravel-dashboard-sentry-tile/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/wotta/sentry-dashboard-tile.svg?style=flat-square)](https://packagist.org/packages/wotta/sentry-dashboard-tile)
 
 This package allows you to get an overview of the latest 20 issues or get the issues from a specific project.
@@ -28,6 +28,8 @@ In your dashboard view you use the `livewire:sentry-title` component.
 ```
 
 ## Testing
+
+The current coverage for the package can be found [here](https://sentry-dashboard-tile.vercel.app).
 
 ``` bash
 composer test
