@@ -16,6 +16,11 @@ You can install the package via composer:
 composer require wotta/sentry-dashboard-tile
 ```
 
+To publish the migration stubs you need to run the following command
+```bash
+php artisan vendor:publish --tag=dashboard-sentry-migrations
+```
+
 ## Usage
 
 In your dashboard view you use the `livewire:sentry-tile` component.
