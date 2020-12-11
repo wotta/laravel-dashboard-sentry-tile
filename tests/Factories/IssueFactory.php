@@ -2,9 +2,9 @@
 
 namespace Wotta\SentryTile\Tests\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Wotta\SentryTile\Models\Issue;
 use Wotta\SentryTile\Objects\Issue as IssueObject;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IssueFactory extends Factory
 {
@@ -61,8 +61,8 @@ class IssueFactory extends Factory
                     ucfirst($this->faker->word),
                     $this->faker->word,
                     ucfirst($this->faker->word)
-                )
-            ]
+                ),
+            ],
         ]);
     }
 
@@ -78,7 +78,7 @@ class IssueFactory extends Factory
                 'name' => $this->faker->name,
                 'type' => 'user',
                 'email' => $this->faker->email,
-            ]
+            ],
         ]);
     }
 }

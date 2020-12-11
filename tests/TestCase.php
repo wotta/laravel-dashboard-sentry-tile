@@ -2,11 +2,11 @@
 
 namespace Wotta\SentryTile\Tests;
 
-use Livewire\LivewireServiceProvider;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Artisan;
-use Wotta\SentryTile\SentryTileServiceProvider;
 use Illuminate\Foundation\Console\VendorPublishCommand;
+use Illuminate\Support\Facades\Artisan;
+use Livewire\LivewireServiceProvider;
+use Wotta\SentryTile\SentryTileServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -15,7 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         parent::setUp();
 
         Artisan::call(VendorPublishCommand::class, [
-            '--tag' => 'dashboard-sentry-migrations'
+            '--tag' => 'dashboard-sentry-migrations',
         ]);
 
         $this->artisan('migrate', [

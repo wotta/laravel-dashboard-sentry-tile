@@ -19,7 +19,7 @@ class IssueObjectTest extends TestCase
     public function test_object_has_meta_title(): void
     {
         $issue = Issue::factory()->create([
-            'meta' => ['title' => 'This is the meta title']
+            'meta' => ['title' => 'This is the meta title'],
         ]);
 
         $this->assertInstanceOf(Issue::class, $issue);
@@ -32,7 +32,7 @@ class IssueObjectTest extends TestCase
         $reflectionObject = new \ReflectionObject($issueObject->meta());
 
         /** @var \ReflectionProperty $attributeProperty */
-        $attributeProperty = tap($reflectionObject->getProperty('attributes'), fn(\ReflectionProperty $property) => $property->setAccessible(true));
+        $attributeProperty = tap($reflectionObject->getProperty('attributes'), fn (\ReflectionProperty $property) => $property->setAccessible(true));
 
         $this->assertArrayHasKey('title', $attributeProperty->getValue($issueObject->meta()));
         $this->assertSame($issue->meta['title'], $attributeProperty->getValue($issueObject->meta())['title']);
@@ -46,7 +46,7 @@ class IssueObjectTest extends TestCase
                 'name' => 'John Doe',
                 'type' => 'user',
                 'email' => 'johndoe@example.com',
-            ]
+            ],
         ]);
 
         $this->assertInstanceOf(Issue::class, $issue);
@@ -63,7 +63,7 @@ class IssueObjectTest extends TestCase
         $reflectionObject = new \ReflectionObject($issueObject->assignedTo());
 
         /** @var \ReflectionProperty $attributeProperty */
-        $attributeProperty = tap($reflectionObject->getProperty('attributes'), fn(\ReflectionProperty $property) => $property->setAccessible(true));
+        $attributeProperty = tap($reflectionObject->getProperty('attributes'), fn (\ReflectionProperty $property) => $property->setAccessible(true));
 
         $this->assertArrayHasKey('id', $attributeProperty->getValue($issueObject->assignedTo()));
         $this->assertArrayHasKey('name', $attributeProperty->getValue($issueObject->assignedTo()));
