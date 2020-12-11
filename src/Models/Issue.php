@@ -2,11 +2,11 @@
 
 namespace Wotta\SentryTile\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Wotta\SentryTile\Tests\Factories\IssueFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Wotta\SentryTile\Tests\Factories\IssueFactory;
 
 class Issue extends Model
 {
