@@ -103,13 +103,13 @@ class Issue
 
     public function assignedTo(): ?Assignee
     {
-        Assert::keyExists($this->attributes, 'assignedTo');
+        Assert::keyExists($this->attributes, 'assigned_to');
 
-        if (! $this->attributes['assignedTo']) {
+        if (! $this->attributes['assigned_to']) {
             return null;
         }
 
-        return new Assignee($this->attributes['assignedTo']);
+        return new Assignee($this->attributes['assigned_to']);
     }
 
     public function project(): ?Project
