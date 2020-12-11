@@ -27,6 +27,21 @@ In your dashboard view you use the `livewire:sentry-tile` component.
 </x-dashboard>
 ```
 
+You need to add the following config to your `dashboard.php` config file.
+```php
+'tiles' => [
+    'sentry' => [
+        'token' => env('SENTRY_TILE_TOKEN'),
+        'production_only' => env('SENTRY_TILE_PRODUCTION', false),
+    ]
+]
+```
+
+And to periodically sync the issues from sentry you need to add the following to your `Kernel.php`:
+```php
+$schedule->command(ListenForSentryIssuesCommand::class)->everyThirtyMinutes();
+```
+
 ## Testing
 
 The current coverage for the package can be found [here](https://sentry-dashboard-tile.vercel.app).
