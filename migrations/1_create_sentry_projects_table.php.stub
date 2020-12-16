@@ -1,5 +1,6 @@
 <?php
 
+use Wotta\SentryTile\Models\Team;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +16,7 @@ class CreateSentryProjectsTable extends Migration
     {
         Schema::create('sentry_projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Team::class)->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->string('organization');

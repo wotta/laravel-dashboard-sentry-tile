@@ -23,7 +23,7 @@ class CreateSentryIssuesTable extends Migration
             $table->enum('status', Issue::STATUSES);
             $table->string('type');
             $table->string('level');
-            $table->string('logger');
+            $table->string('logger')->nullable();
             $table->timestamp('first_seen')->nullable();
             $table->timestamp('last_seen')->nullable();
             $table->string('permalink');
