@@ -13,6 +13,7 @@ class NoClientTokenSet extends Exception
             "No sentry api token is set while trying to connect to sentry.\n
             Please visit: https://sentry.io/settings/account/api/",
             $code,
-            $previous);
+            $previous
+        );
     }
 }

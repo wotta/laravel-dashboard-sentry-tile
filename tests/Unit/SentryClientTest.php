@@ -2,11 +2,11 @@
 
 namespace Wotta\SentryTile\Tests\Unit;
 
-use ReflectionObject;
-use Wotta\SentryTile\Tests\TestCase;
-use Wotta\SentryTile\SentryClient;
 use Illuminate\Http\Client\PendingRequest;
+use ReflectionObject;
 use Wotta\SentryTile\Exceptions\NoClientTokenSet;
+use Wotta\SentryTile\SentryClient;
+use Wotta\SentryTile\Tests\TestCase;
 
 class SentryClientTest extends TestCase
 {
