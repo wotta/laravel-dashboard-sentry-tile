@@ -16,14 +16,14 @@ class SentryClientTest extends TestCase
         $this->expectDeprecationMessage("No sentry api token is set while trying to connect to sentry.\n
             Please visit: https://sentry.io/settings/account/api/");
 
-        SentryClient::get();
+        SentryClient::prepareClient();
     }
 
     public function test_client_does_not_throw_an_exception_when_api_key_is_set(): void
     {
         $this->app['config']->set('dashboard.tiles.sentry.token', 'test_api_token');
 
-        $client = SentryClient::get();
+        $client = SentryClient::prepareClient();
 
         $this->assertInstanceOf(PendingRequest::class, $client);
 
@@ -39,7 +39,7 @@ class SentryClientTest extends TestCase
         $this->app['config']->set('dashboard.tiles.sentry.token', 'test_api_token');
         $this->app['config']->set('dashboard.tiles.sentry.base_url', 'https://wotty.io/no-api/0/');
 
-        $client = SentryClient::get();
+        $client = SentryClient::prepareClient();
 
         $this->assertInstanceOf(PendingRequest::class, $client);
 

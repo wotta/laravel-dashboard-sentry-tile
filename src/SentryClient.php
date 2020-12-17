@@ -12,7 +12,7 @@ class SentryClient extends Factory
      * @return PendingRequest
      * @throws \Throwable|NoClientTokenSet
      */
-    public static function get(): PendingRequest
+    public static function prepareClient(): PendingRequest
     {
         throw_if(! config('dashboard.tiles.sentry.token'), NoClientTokenSet::class);
 
