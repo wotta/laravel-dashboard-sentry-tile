@@ -1,9 +1,11 @@
 {
     "name": "wotta/sentry-dashboard-tile",
-    "description": "A sentry dashboard title that shows the latest 5 issues.",
+    "description": "Get an overview of the latest issues or get the issues from a specific project.\n\n",
     "keywords": [
-        "wotta",
-        "sentry-dashboard-tile"
+        "Laravel",
+        "Laravel-dashboard",
+        "sentry",
+        "package"
     ],
     "homepage": "https://github.com/wotta/sentry-dashboard-tile",
     "license": "MIT",
@@ -12,7 +14,7 @@
             "name": "Wouter van Marrum",
             "email": "wouter.van.marrum@protonmail.com",
             "homepage": "https://woutervm.com",
-            "role": "Developer"
+            "role": "Maintainer"
         }
     ],
     "require": {
@@ -20,6 +22,7 @@
         "spatie/laravel-dashboard": "^2.0"
     },
     "require-dev": {
+        "guzzlehttp/guzzle": "^7.2",
         "orchestra/testbench": "^6.6",
         "phpunit/phpunit": "^9.3"
     },
