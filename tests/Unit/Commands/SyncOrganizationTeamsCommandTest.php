@@ -3,9 +3,8 @@
 namespace Wotta\SentryTile\Tests\Unit\Commands;
 
 use Illuminate\Http\Response;
-use Wotta\SentryTile\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Artisan;
+use Wotta\SentryTile\Tests\TestCase;
 use Wotta\SentryTile\Tests\Traits\InteractWithFixture;
 
 class SyncOrganizationTeamsCommandTest extends TestCase
@@ -36,7 +35,7 @@ class SyncOrganizationTeamsCommandTest extends TestCase
         $url = sprintf('https://sentry.io/api/0/organizations/%s/teams/', $this->organization);
 
         Http::fake([
-            $url => Http::response($this->getFixture('teams_without_projects.json'), Response::HTTP_OK)
+            $url => Http::response($this->getFixture('teams_without_projects.json'), Response::HTTP_OK),
         ]);
 
         $this->artisan('sentry:sync:organization:teams')

@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
-use Wotta\SentryTile\Commands\SyncOrganizationTeams;
 use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
+use Wotta\SentryTile\Commands\SyncOrganizationTeams;
 
 class SentryTileServiceProvider extends ServiceProvider
 {

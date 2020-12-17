@@ -3,8 +3,8 @@
 namespace Wotta\SentryTile\Commands;
 
 use Illuminate\Console\Command;
-use Wotta\SentryTile\SentryClient;
 use Wotta\SentryTile\Exceptions\NoOrganizationSet;
+use Wotta\SentryTile\SentryClient;
 
 class SyncOrganizationTeams extends Command
 {
