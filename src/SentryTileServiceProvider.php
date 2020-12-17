@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
+use Wotta\SentryTile\Commands\SyncOrganizationTeams;
 use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
 
 class SentryTileServiceProvider extends ServiceProvider
@@ -16,6 +17,7 @@ class SentryTileServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                SyncOrganizationTeams::class,
                 ListenForSentryIssuesCommand::class,
             ]);
         }
