@@ -2,14 +2,17 @@
 
 namespace Wotta\SentryTile;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Livewire\Livewire;
-use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\ServiceProvider;
+use Wotta\SentryTile\Exceptions\NoClientTokenSet;
 use Wotta\SentryTile\Commands\SyncOrganizationTeams;
+use Wotta\SentryTile\Commands\SyncOrganizationTeams;
+use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
 
 class SentryTileServiceProvider extends ServiceProvider
 {
@@ -41,6 +44,17 @@ class SentryTileServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dashboard-sentry-tile-views');
 
         Livewire::component('sentry-tile', SentryTileComponent::class);
+    }
+
+    public function register(): void
+    {
+        Http::macro('prepareClient', function () {
+            throw_if(! config('dashboard.tiles.sentry.token'), NoClientTokenSet::class);
+
+            return $this
+                ->withToken(config('dashboard.tiles.sentry.token'))
+                ->baseUrl(config('dashboard.tiles.sentry.base_url', 'https://sentry.io/api/0/'));
+        });
     }
 
     /**
