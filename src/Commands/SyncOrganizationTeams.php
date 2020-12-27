@@ -3,8 +3,9 @@
 namespace Wotta\SentryTile\Commands;
 
 use Illuminate\Console\Command;
+use Wotta\SentryTile\Models\Team;
+use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Exceptions\NoOrganizationSet;
-use Wotta\SentryTile\SentryClient;
 
 class SyncOrganizationTeams extends Command
 {
@@ -18,11 +19,28 @@ class SyncOrganizationTeams extends Command
 
         abort_if(! $organization, NoOrganizationSet::class);
 
-        $teams = SentryClient::prepareClient()->get(
+        $teams = Http::prepareClient()->get(
             sprintf(
-                'organizations/%s/team',
+                'organizations/%s/teams/',
                 $organization
             )
         );
+
+        $this->info('Syncing teams for organization');
+
+        $teams = json_decode($teams->body(), true);
+
+        collect($teams)->each(function ($team) {
+            // Store the team object in the database.
+            /** @var Team $team */
+            $team = Team::updateOrCreate(
+                ['slug' => $team['slug']],
+                ['name' => $team['name']]
+            );
+
+            $infoText = $team->wasRecentlyCreated ? 'Created': 'Updated';
+
+            $this->comment(sprintf('%s team: %s', $infoText, $team['name']));
+        });
     }
 }

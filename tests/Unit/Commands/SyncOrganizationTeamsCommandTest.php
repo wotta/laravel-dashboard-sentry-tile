@@ -28,7 +28,7 @@ class SyncOrganizationTeamsCommandTest extends TestCase
         $this->app['config']->set('dashboard.tiles.sentry.base_url', 'https://sentry.io/api/0/');
     }
 
-    public function test_command_display_information_that_is_stored()
+    public function test_command_display_information_that_is_stored(): void
     {
         $this->app['config']->set('dashboard.tiles.sentry.organization', $this->organization);
 
@@ -43,7 +43,5 @@ class SyncOrganizationTeamsCommandTest extends TestCase
             ->expectsOutput('Created team: Ancient Gabelers')
             ->expectsOutput('Created team: Powerful Abolitionist')
             ->assertExitCode(0);
-
-        Http::assertNothingSent();
     }
 }
