@@ -17,7 +17,6 @@ class CreateSentryTeamsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->unsignedInteger('member_count');
             $table->timestamps();
             $table->softDeletes();
         });

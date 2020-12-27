@@ -9,6 +9,8 @@ class Team extends Model
 {
     protected $table = 'sentry_teams';
 
+    protected $guarded = [];
+
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class);
