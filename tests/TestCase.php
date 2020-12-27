@@ -2,12 +2,11 @@
 
 namespace Wotta\SentryTile\Tests;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Console\VendorPublishCommand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Livewire\LivewireServiceProvider;
 use Wotta\SentryTile\SentryTileServiceProvider;
 
@@ -31,7 +30,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         Artisan::call(VendorPublishCommand::class, [
             '--tag' => 'dashboard-sentry-migrations',
-            '--force' => true
+            '--force' => true,
         ]);
     }
 

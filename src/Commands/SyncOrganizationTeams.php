@@ -3,9 +3,9 @@
 namespace Wotta\SentryTile\Commands;
 
 use Illuminate\Console\Command;
-use Wotta\SentryTile\Models\Team;
 use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Exceptions\NoOrganizationSet;
+use Wotta\SentryTile\Models\Team;
 
 class SyncOrganizationTeams extends Command
 {
