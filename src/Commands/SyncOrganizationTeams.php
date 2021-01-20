@@ -31,7 +31,6 @@ class SyncOrganizationTeams extends Command
         $teams = json_decode($teams->body(), true);
 
         collect($teams)->each(function ($team) {
-            // Store the team object in the database.
             /** @var Team $team */
             $team = Team::updateOrCreate(
                 ['slug' => $team['slug']],
