@@ -1,0 +1,37 @@
+<?php
+
+use Wotta\SentryTile\Models\Team;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateSentryProjectsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('sentry_projects', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Team::class)->cascadeOnDelete();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('organization');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('sentry_projects');
+    }
+}

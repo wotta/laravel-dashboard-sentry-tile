@@ -36,6 +36,7 @@ You need to add the following config to your `dashboard.php` config file.
 ```php
 'tiles' => [
     'sentry' => [
+        'organization' => 'exampleorg',
         'token' => env('SENTRY_TILE_TOKEN'),
         'production_only' => env('SENTRY_TILE_PRODUCTION', false),
     ]
@@ -45,6 +46,24 @@ You need to add the following config to your `dashboard.php` config file.
 And to periodically sync the issues from sentry you need to add the following to your `Kernel.php`:
 ```php
 $schedule->command(ListenForSentryIssuesCommand::class)->everyThirtyMinutes();
+```
+
+## Commands
+
+### # sentry:sync:organization:teams
+Import the teams that belong to this organization
+
+**Arguments**:
+- organization - The organization name `Optional`
+```bash
+php artisan sentry:sync:organization:teams [<organization>]
+```
+
+### # dashboard:fetch-data-from-sentry-api
+Import the projects and issues for the imported projects
+
+```bash
+php artisan dashboard:fetch-data-from-sentry-api
 ```
 
 ## Testing
