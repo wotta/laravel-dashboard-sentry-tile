@@ -4,11 +4,14 @@ namespace Wotta\SentryTile\Tests\Objects;
 
 use Wotta\SentryTile\Models\Issue;
 use Wotta\SentryTile\Tests\TestCase;
+use Illuminate\Support\Facades\File;
 
 class IssueObjectTest extends TestCase
 {
     public function test_object_can_be_filled_from_model(): void
     {
+        dd(File::files(__DIR__ . '/../../vendor/orchestra/testbench-core/laravel/database/migrations'));
+
         $issue = Issue::factory()->create();
 
         $this->assertInstanceOf(Issue::class, $issue);
