@@ -2,9 +2,9 @@
 
 namespace Wotta\SentryTile\Tests\Objects;
 
+use Illuminate\Support\Facades\File;
 use Wotta\SentryTile\Models\Issue;
 use Wotta\SentryTile\Tests\TestCase;
-use Illuminate\Support\Facades\File;
 
 class IssueObjectTest extends TestCase
 {
