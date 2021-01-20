@@ -2,16 +2,16 @@
 
 namespace Wotta\SentryTile;
 
-use Livewire\Livewire;
-use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
-use Wotta\SentryTile\Exceptions\NoClientTokenSet;
-use Wotta\SentryTile\Commands\SyncOrganizationTeams;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
+use Wotta\SentryTile\Commands\SyncOrganizationTeams;
+use Wotta\SentryTile\Exceptions\NoClientTokenSet;
 
 class SentryTileServiceProvider extends ServiceProvider
 {
