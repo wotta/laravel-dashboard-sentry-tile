@@ -3,6 +3,7 @@
 namespace Wotta\SentryTile\Tests;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Console\VendorPublishCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -32,6 +33,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             '--tag' => 'dashboard-sentry-migrations',
             '--force' => true,
         ]);
+
+        dump(Schema::hasTable('sentry_issues'));
     }
 
     /**

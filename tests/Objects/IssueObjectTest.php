@@ -10,8 +10,6 @@ class IssueObjectTest extends TestCase
 {
     public function test_object_can_be_filled_from_model(): void
     {
-        dd(File::files(__DIR__ . '/../../vendor/orchestra/testbench-core/laravel/database/migrations'));
-
         $issue = Issue::factory()->create();
 
         $this->assertInstanceOf(Issue::class, $issue);
