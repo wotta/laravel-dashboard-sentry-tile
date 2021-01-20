@@ -3,11 +3,11 @@
 namespace Wotta\SentryTile\Tests;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Console\VendorPublishCommand;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Livewire\LivewireServiceProvider;
 use Wotta\SentryTile\SentryTileServiceProvider;
 
