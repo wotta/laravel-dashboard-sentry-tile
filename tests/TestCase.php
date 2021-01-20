@@ -34,6 +34,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
             '--force' => true,
         ]);
 
+        $this->artisan('migrate')->run();
+
         dump(Schema::hasTable('sentry_issues'));
     }
 
