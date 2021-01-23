@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Console\Commands;
 
 use Illuminate\Console\Command;
+use Wotta\SentryTile\Models\Team;
 use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Console\Commands\Traits\InteractsWithOrganization;
-use Wotta\SentryTile\Models\Team;
 
 class SyncOrganizationTeams extends Command
 {
@@ -35,7 +37,7 @@ class SyncOrganizationTeams extends Command
                 ['name' => $team['name']]
             );
 
-            $infoText = $team->wasRecentlyCreated ? 'Created': 'Updated';
+            $infoText = $team->wasRecentlyCreated ? 'Created' : 'Updated';
 
             $this->comment(sprintf('%s team: %s', $infoText, $team['name']));
         });

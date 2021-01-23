@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Tests\Objects;
 
 use Wotta\SentryTile\Models\Issue;

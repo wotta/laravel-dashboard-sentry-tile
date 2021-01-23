@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Objects;
 
 use Carbon\Carbon;
@@ -16,7 +18,9 @@ class Issue
     ];
 
     public const RESOLVED = 'resolved';
+
     public const UNRESOLVED = 'unresolved';
+
     public const IGNORED = 'ignored';
 
     protected array $attributes;

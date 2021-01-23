@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Tests;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Console\VendorPublishCommand;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Livewire\LivewireServiceProvider;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Wotta\SentryTile\SentryTileServiceProvider;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Console\VendorPublishCommand;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

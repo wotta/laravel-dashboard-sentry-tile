@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Tests\Unit;
 
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
 use ReflectionObject;
-use Wotta\SentryTile\Exceptions\NoClientTokenSet;
+use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Tests\TestCase;
+use Illuminate\Http\Client\PendingRequest;
+use Wotta\SentryTile\Exceptions\NoClientTokenSet;
 
 class SentryClientTest extends TestCase
 {
