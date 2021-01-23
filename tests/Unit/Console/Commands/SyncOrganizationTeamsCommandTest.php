@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wotta\SentryTile\Tests\Unit\Commands;
+namespace Wotta\SentryTile\Tests\Unit\Console\Commands;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
