@@ -18,11 +18,6 @@ repos:
         language: pygrep
         entry: '\b(console\s*\.\s*debug|console\s*\.\s*log)\s*\('
         files: resources/js/.*\.(js|html|vue)$
-      - id: check-local-urls
-        name: Check local urls
-        language: pygrep
-        entry: '\.motivo|beta\.motivo\.nl|motivo\.dev'
-        files: .*\.(php|blade|js)$
       - id: check-view-with-with
         name: Check for view()->with
         language: pygrep
@@ -31,12 +26,7 @@ repos:
       - id: php-cs
         name: Run Code Sniffer fixer
         language: system
-        entry: 'composer cs_fix'
-      - id: js-lint
-        name: Run ESLinte fixer
-        language: system
-        entry: './node_modules/.bin/eslint --fix'
-        files: resources/js/.*\.(js)$
+        entry: 'composer format'
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.1.0
     hooks:
