@@ -1,0 +1,12 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+    - repo: local
+      hooks:
+          - id: phpunit
+            name: Run all tests
+            language: system
+            entry: 'composer test'
+            always_run: true
+            pass_filenames: false
+            verbose: true
