@@ -1,28 +1,26 @@
 <?php
 
-namespace Wotta\SentryTile\Commands;
+namespace Wotta\SentryTile\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
-use Wotta\SentryTile\Exceptions\NoOrganizationSet;
 use Wotta\SentryTile\Models\Team;
+use Illuminate\Support\Facades\Http;
+use Wotta\SentryTile\Console\Commands\Traits\InteractsWithOrganization;
 
 class SyncOrganizationTeams extends Command
 {
+    use InteractsWithOrganization;
+
     protected $signature = 'sentry:sync:organization:teams {organization? : A static organization slug}';
 
     protected $description = 'Fetch the organization teams';
 
     public function handle(): void
     {
-        $organization = $this->argument('organization') ?? config('dashboard.tiles.sentry.organization');
-
-        abort_if(! $organization, NoOrganizationSet::class);
-
         $teams = Http::prepareClient()->get(
             sprintf(
                 'organizations/%s/teams/',
-                $organization
+                $this->getOrganization()
             )
         );
 
