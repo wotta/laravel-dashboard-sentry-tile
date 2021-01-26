@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Models\Project;
 
-class SyncOrganizationProject extends Command
+class SyncOrganizationProjects extends Command
 {
     /**
      * The name and signature of the console command.
@@ -33,15 +33,17 @@ class SyncOrganizationProject extends Command
         $projects = json_decode($projects->body(), true);
 
         collect($projects)->each(function ($project) {
-            return Project::updateOrCreate(
+            $project = Project::updateOrCreate(
                 ['slug' => $project['slug']],
                 [
                     'name' => $project['name'],
                     'organization' => $project['organization']['slug'],
                 ]
             );
-        });
 
-        // Let's insert multi models at once
+            $infoText = $project->wasRecentlyCreated ? 'Created' : 'Updated';
+
+            $this->comment(sprintf('%s project: %s', $infoText, $project['name']));
+        });
     }
 }

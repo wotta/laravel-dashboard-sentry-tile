@@ -13,7 +13,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Wotta\SentryTile\Exceptions\NoClientTokenSet;
 use Wotta\SentryTile\Console\Commands\SyncOrganizationTeams;
-use Wotta\SentryTile\Console\Commands\SyncOrganizationProject;
+use Wotta\SentryTile\Console\Commands\SyncOrganizationProjects;
 use Wotta\SentryTile\Console\Commands\ListenForSentryIssuesCommand;
 
 class SentryTileServiceProvider extends ServiceProvider
@@ -81,7 +81,7 @@ class SentryTileServiceProvider extends ServiceProvider
     {
         $this->commands([
             SyncOrganizationTeams::class,
-            SyncOrganizationProject::class,
+            SyncOrganizationProjects::class,
             ListenForSentryIssuesCommand::class,
         ]);
 
