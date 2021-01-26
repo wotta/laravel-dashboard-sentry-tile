@@ -20,22 +20,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $files = File::files(__DIR__ . '/../vendor/orchestra/testbench-core/laravel/database/migrations');
-
-        collect($files)->each(function (\SplFileInfo $file) {
-            if ($file->getFilename() === '.gitkeep') {
-                return;
-            }
-
-            File::delete($file->getPathname());
-        });
+        File::cleanDirectory(__DIR__ . '/../vendor/orchestra/testbench-core/laravel/database/migrations');
 
         Artisan::call(VendorPublishCommand::class, [
             '--tag' => 'dashboard-sentry-migrations',
             '--force' => true,
         ]);
 
-        $this->artisan('migrate')->run();
+        $this->artisan('migrate:fresh')->run();
     }
 
     /**
