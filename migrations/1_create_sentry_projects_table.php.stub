@@ -16,7 +16,7 @@ class CreateSentryProjectsTable extends Migration
     {
         Schema::create('sentry_projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Team::class)->cascadeOnDelete();
+            $table->foreignIdFor(Team::class)->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
             $table->string('organization');
