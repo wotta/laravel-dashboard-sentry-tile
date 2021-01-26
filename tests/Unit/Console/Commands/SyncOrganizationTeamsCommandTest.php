@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Tests\TestCase;
 use Wotta\SentryTile\Tests\Traits\InteractWithFixture;
 use Wotta\SentryTile\Tests\Unit\Traits\InteractWithSentry;
+use Wotta\SentryTile\Tests\Unit\Traits\InteractWithOrganizationConfig;
 
 class SyncOrganizationTeamsCommandTest extends TestCase
 {
     use InteractWithSentry,
-        InteractWithFixture;
+        InteractWithFixture,
+        InteractWithOrganizationConfig;
 
     public function test_command_display_information_that_is_stored(): void
     {
-        $this->app['config']->set('dashboard.tiles.sentry.organization', $this->organization);
+        $this->setOrganizationConfig();
 
         $url = sprintf('https://sentry.io/api/0/organizations/%s/teams/', $this->organization);
 
