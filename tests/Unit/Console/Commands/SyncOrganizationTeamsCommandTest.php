@@ -33,4 +33,21 @@ class SyncOrganizationTeamsCommandTest extends TestCase
             ->expectsOutput('Created team: Powerful Abolitionist')
             ->assertExitCode(0);
     }
+
+    public function test_can_import_projects_for_the_teams(): void
+    {
+        $this->setOrganizationConfig();
+
+        $url = sprintf('https://sentry.io/api/0/organizations/%s/teams/', $this->organization);
+
+        Http::fake([
+            $url => Http::response($this->getFixture('teams_with_projects.json'), Response::HTTP_OK),
+        ]);
+
+        $this->artisan('sentry:sync:organization:teams', ['--with-projects' => true])
+            ->expectsOutput('Syncing teams for organization')
+            ->expectsOutput('Created team: Ancient Gabelers')
+            ->expectsOutput('Created team: Powerful Abolitionist')
+            ->assertExitCode(0);
+    }
 }

@@ -7,13 +7,15 @@ namespace Wotta\SentryTile\Console\Commands;
 use Illuminate\Console\Command;
 use Wotta\SentryTile\Models\Team;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Wotta\SentryTile\Console\Commands\Traits\InteractsWithOrganization;
 
 class SyncOrganizationTeams extends Command
 {
     use InteractsWithOrganization;
 
-    protected $signature = 'sentry:sync:organization:teams {organization? : A static organization slug}';
+    protected $name = 'sentry:sync:organization:teams';
 
     protected $description = 'Fetch the organization teams';
 
@@ -40,6 +42,35 @@ class SyncOrganizationTeams extends Command
             $infoText = $team->wasRecentlyCreated ? 'Created' : 'Updated';
 
             $this->comment(sprintf('%s team: %s', $infoText, $team['name']));
+
+            return $team;
+        })
+        ->when($this->option('with-projects'))
+        ->mapWithKeys(function ($team) {
+            return [$team->id => $team['projects']];
+        })
+        ->each(function ($projects) {
+
+            // Import project
+//            return [
+//                'slug' => '',
+//                'name' => $project['name'],
+//                'organization' => $project['organization']['slug'],
+//            ];
         });
+    }
+
+    public function getArguments(): array
+    {
+        return [
+            ['organization', InputArgument::OPTIONAL, 'A static organization slug'],
+        ];
+    }
+
+    public function getOptions(): array
+    {
+        return [
+            ['with-projects', null, InputOption::VALUE_NONE, 'When the team has projects import those projects.'],
+        ];
     }
 }
