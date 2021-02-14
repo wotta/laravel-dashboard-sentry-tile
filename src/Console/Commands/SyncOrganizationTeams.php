@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Wotta\SentryTile\Console\Commands;
 
+use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Wotta\SentryTile\Models\Team;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Wotta\SentryTile\Console\Commands\Traits\SyncsProjects;
 use Wotta\SentryTile\Console\Commands\Traits\InteractsWithOrganization;
 
 class SyncOrganizationTeams extends Command
 {
+    use SyncsProjects;
     use InteractsWithOrganization;
 
     protected $name = 'sentry:sync:organization:teams';
@@ -32,31 +36,43 @@ class SyncOrganizationTeams extends Command
 
         $teams = json_decode($teams->body(), true);
 
-        collect($teams)->each(function ($team) {
+        collect($teams)->mapWithKeys(function ($team) {
             /** @var Team $team */
-            $team = Team::updateOrCreate(
+            $teamModel = Team::updateOrCreate(
                 ['slug' => $team['slug']],
                 ['name' => $team['name']]
             );
 
-            $infoText = $team->wasRecentlyCreated ? 'Created' : 'Updated';
+            $infoText = $teamModel->wasRecentlyCreated ? 'Created' : 'Updated';
 
-            $this->comment(sprintf('%s team: %s', $infoText, $team['name']));
+            $this->comment(sprintf('%s team: %s', $infoText, $teamModel->name));
 
-            return $team;
+            return [$teamModel->id => $team];
         })
-        ->when($this->option('with-projects'))
-        ->mapWithKeys(function ($team) {
-            return [$team->id => $team['projects']];
-        })
-        ->each(function ($projects) {
+        ->when($this->option('with-projects'), function (Collection $collection) {
+            return $collection->mapWithKeys(function ($teamData, $teamId) {
+                // Get the projects
+                $teamProjects = Arr::get($teamData, 'projects', []);
 
-            // Import project
-//            return [
-//                'slug' => '',
-//                'name' => $project['name'],
-//                'organization' => $project['organization']['slug'],
-//            ];
+                $projects = [];
+
+                foreach ($teamProjects as $project) {
+                    $projects[] = Arr::only($project, ['name', 'slug']) +
+                        [
+                            'organization' => config('dashboard.tiles.sentry.organization'),
+                            'team_id' => $teamId,
+                        ];
+                }
+
+                // convert array to be used with the projects import.
+                return [$teamId => $projects];
+            })
+                ->flatten(1)
+                ->tap(function ($collection) {
+                    $this->syncProjects($collection->toArray());
+
+                    $this->info('Imported projects');
+                });
         });
     }
 

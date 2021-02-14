@@ -48,6 +48,7 @@ class SyncOrganizationTeamsCommandTest extends TestCase
             ->expectsOutput('Syncing teams for organization')
             ->expectsOutput('Created team: Ancient Gabelers')
             ->expectsOutput('Created team: Powerful Abolitionist')
+            ->expectsOutput('Imported projects')
             ->assertExitCode(0);
     }
 }
