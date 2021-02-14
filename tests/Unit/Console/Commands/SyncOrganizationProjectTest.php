@@ -19,6 +19,8 @@ class SyncOrganizationProjectTest extends TestCase
 
     public function test_command_displays_information_that_is_stored(): void
     {
+        $this->markTestSkipped('Thinking about removing this functionality.');
+
         $this->setOrganizationConfig();
 
         $url = sprintf('https://sentry.io/api/0/projects/');
