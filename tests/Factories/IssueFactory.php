@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Tests\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Wotta\SentryTile\Models\Issue;
 use Wotta\SentryTile\Objects\Issue as IssueObject;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IssueFactory extends Factory
 {

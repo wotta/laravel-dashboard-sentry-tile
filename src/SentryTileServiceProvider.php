@@ -1,28 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile;
 
-use Illuminate\Filesystem\Filesystem;
+use Livewire\Livewire;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Livewire\Livewire;
-use Wotta\SentryTile\Commands\ListenForSentryIssuesCommand;
-use Wotta\SentryTile\Commands\SyncOrganizationTeams;
 use Wotta\SentryTile\Exceptions\NoClientTokenSet;
+use Wotta\SentryTile\Console\Commands\SyncOrganizationTeams;
+use Wotta\SentryTile\Console\Commands\SyncOrganizationProjects;
+use Wotta\SentryTile\Console\Commands\ListenForSentryIssuesCommand;
 
 class SentryTileServiceProvider extends ServiceProvider
 {
     public function boot(Filesystem $filesystem)
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                SyncOrganizationTeams::class,
-                ListenForSentryIssuesCommand::class,
-            ]);
-        }
+        $this->registerCommands();
 
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/dashboard-sentry-tile'),
@@ -67,10 +65,26 @@ class SentryTileServiceProvider extends ServiceProvider
     {
         $timestamp = date('Y_m_d_His');
 
-        return Collection::make($this->app->databasePath().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR)
+        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
             ->flatMap(function ($path) use ($filesystem, $filename) {
-                return $filesystem->glob($path.'*_'.$filename);
-            })->push($this->app->databasePath()."/migrations/{$timestamp}_".$filename)
+                return $filesystem->glob($path . '*_' . $filename);
+            })->push($this->app->databasePath() . "/migrations/{$timestamp}_" . $filename)
             ->first();
+    }
+
+    /**
+     * Register our custom commands.
+     *
+     * @return $this
+     */
+    protected function registerCommands(): self
+    {
+        $this->commands([
+            SyncOrganizationTeams::class,
+            SyncOrganizationProjects::class,
+            ListenForSentryIssuesCommand::class,
+        ]);
+
+        return $this;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace Wotta\SentryTile\Commands;
+declare(strict_types=1);
+
+namespace Wotta\SentryTile\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
@@ -87,10 +89,9 @@ class ListenForSentryIssuesCommand extends Command
         $queryString = QueryString::make()
             ->addQuery('query', 'is:unresolved');
 
-        if (config("dashboard.tiles.sentry.production_only")) {
+        if (config('dashboard.tiles.sentry.production_only')) {
             $queryString->addQuery('environment', 'production');
         }
-
 
         if ($projectSlug) {
             foreach (config("dashboard.tiles.sentry.{$projectSlug}.issue_options", []) as $option) {
@@ -100,7 +101,7 @@ class ListenForSentryIssuesCommand extends Command
                     continue;
                 }
 
-                /**
+                /*
                  * Get the key name from the option array.
                  * Get the value from the option array.
                  */

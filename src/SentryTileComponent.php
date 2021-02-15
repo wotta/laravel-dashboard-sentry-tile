@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Livewire\Component;
-use Wotta\SentryTile\Models\Project;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\View;
 use Wotta\SentryTile\Objects\Issue;
+use Wotta\SentryTile\Models\Project;
 
 class SentryTileComponent extends Component
 {

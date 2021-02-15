@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wotta\SentryTile\Tests;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Console\VendorPublishCommand;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Livewire\LivewireServiceProvider;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Wotta\SentryTile\SentryTileServiceProvider;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Console\VendorPublishCommand;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -18,22 +21,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $files = File::files(__DIR__ . '/../vendor/orchestra/testbench-core/laravel/database/migrations');
+        if (Str::startsWith(app()->version(), '7')) {
+            $this->markTestIncomplete('Cannot run these tests yet for the laravel 7 version.');
+        }
 
-        collect($files)->each(function (\SplFileInfo $file) {
-            if ($file->getFilename() === '.gitkeep') {
-                return;
-            }
-
-            File::delete($file->getPathname());
-        });
+        File::cleanDirectory(__DIR__ . '/../vendor/orchestra/testbench-core/laravel/database/migrations');
 
         Artisan::call(VendorPublishCommand::class, [
             '--tag' => 'dashboard-sentry-migrations',
             '--force' => true,
         ]);
 
-        $this->artisan('migrate')->run();
+        $this->artisan('migrate:fresh')->run();
     }
 
     /**

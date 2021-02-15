@@ -15,7 +15,7 @@ jobs:
           - laravel: 8.*
             testbench: 6.*
 
-    name: P${{ matrix.php-versions }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+    name: P${{ matrix.php-versions }} - L${{ matrix.laravel }} - o${{ matrix.testbench }} - ${{ matrix.dependency-version }}
 
     steps:
       - name: Checkout code
@@ -38,6 +38,9 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+      - name: lint php
+        run: composer lint
 
       - name: Execute test suite
         uses: theomessin/action-phpcov@master
