@@ -19,8 +19,8 @@ class Issue extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'first_seen' => 'date',
-        'last_seen' => 'date',
+        'first_seen' => 'datetime',
+        'last_seen' => 'datetime',
         'meta' => 'array',
         'assigned_to' => 'array',
     ];
