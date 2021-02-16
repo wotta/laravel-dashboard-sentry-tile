@@ -43,10 +43,17 @@ You need to add the following config to your `dashboard.php` config file.
 ]
 ```
 
-And to periodically sync the issues from sentry you need to add the following to your `Kernel.php`:
+And to periodically sync the issues from sentry you need to add the following to your `Console/Kernel.php`:
 ```php
 $schedule->command(ListenForSentryIssuesCommand::class)->everyThirtyMinutes();
 ```
+
+Add the following code to your `Console/Kernel.php` to import the teams (and projects).
+```php
+ $schedule->command(SyncOrganizationTeams::class, [
+     '--with-projects'
+ ])->hourly();
+ ```
 
 ## Commands
 
@@ -55,8 +62,12 @@ Import the teams that belong to this organization
 
 **Arguments**:
 - organization - The organization name `Optional`
+
+**Options**:
+- with-projects - Import the projects that belong to the organization `Optional`
+
 ```bash
-php artisan sentry:sync:organization:teams [<organization>]
+php artisan sentry:sync:organization:teams [<organization>] [--with-projects]
 ```
 
 ### # dashboard:fetch-data-from-sentry-api
