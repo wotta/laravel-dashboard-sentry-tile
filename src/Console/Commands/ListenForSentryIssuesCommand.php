@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wotta\SentryTile\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Wotta\SentryTile\Models\Project;
@@ -64,8 +65,8 @@ class ListenForSentryIssuesCommand extends Command
                             'type' => $issue['type'],
                             'level' => $issue['level'],
                             'logger' => $issue['logger'],
-                            'first_seen' => $issue['firstSeen'],
-                            'last_seen' => $issue['lastSeen'],
+                            'first_seen' => Carbon::parse($issue['firstSeen']),
+                            'last_seen' => Carbon::parse($issue['lastSeen']),
                             'permalink' => $issue['permalink'],
                             'meta' => $issue['metadata'],
                             'assigned_to' => $issue['assignedTo'],
