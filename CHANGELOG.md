@@ -2,6 +2,13 @@
 
 All notable changes to `sentry-dashboard-tile` will be documented in this file
 
+## 2.0.1 - 2021-02-16
+
+**Fixed:**
+
+- Parsed the datetimes before importing
+- Added the correct casts for the `first_seen` and `last_seen` columns on the `Issue` model.
+
 ## 2.0.0 - 2021-02-15
 
 **Added:**
