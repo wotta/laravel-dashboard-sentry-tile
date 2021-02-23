@@ -2,16 +2,16 @@
 <x-dashboard-tile :position="$position" :refresh-interval="$refreshIntervalInSeconds">
     <div class="grid grid-rows-auto-1 gap-2 h-full">
         <div class="text-3xl leading-none -mt-1">
-            {{ $projectName }} @if($title){{ $title }}@endif
+            {{ $team }} @if($title){{ $title }}@endif
         </div>
         <div class="divide-y-2 overflow-auto">
-            @foreach($issues as $issue)
+            @foreach($this->issues as $issue)
                 <li class="overflow-hidden py-4 list-none">
                     <div class="grid gap-2">
                         <div class="grid grid-cols-auto-1 gap-2 items-center">
                             <div class="leading-tight min-w-0">
-                                <h4 class="truncate text-sm font-bold" title="@if(! $projectName){{ $issue->project()->slug() }}: @endif{{ $issue->title() }}">
-                                    @if(! $projectName)<span class="text-accent">{{ $issue->project()->slug() }}</span>:@endif {{ $issue->title() }}
+                                <h4 class="truncate text-sm font-bold" title="{{ $issue->project()->slug() }}: {{ $issue->title() }}">
+                                    <span class="text-accent">{{ $issue->project()->slug() }}</span>: {{ $issue->title() }}
                                 </h4>
                             </div>
                         </div>
