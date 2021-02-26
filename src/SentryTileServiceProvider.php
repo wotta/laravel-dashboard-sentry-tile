@@ -40,7 +40,7 @@ class SentryTileServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dashboard-sentry-tile-views');
 
-        Livewire::component('sentry-tile', SentryTileComponent::class);
+        $this->registerLivewireComponents($filesystem);
     }
 
     public function register(): void
@@ -52,6 +52,27 @@ class SentryTileServiceProvider extends ServiceProvider
                 ->withToken(config('dashboard.tiles.sentry.token'))
                 ->baseUrl(config('dashboard.tiles.sentry.base_url', 'https://sentry.io/api/0/'));
         });
+    }
+
+    public function registerLivewireComponents(Filesystem $filesystem): void
+    {
+        Collection::make(__DIR__ . '/Http/Livewire/')
+            ->flatMap(function ($path) use ($filesystem) {
+                return $filesystem->glob($path . '*');
+            })
+            ->filter(function ($componentPath) {
+                return ! Str::contains($componentPath, 'BaseSentryComponent.php');
+            })
+            ->map(function ($path) {
+                $namespace = '\Wotta\SentryTile\Http\Livewire\\';
+                $componentClass = Str::before(Str::after($path, 'Livewire/'), '.php');
+
+                $object = $namespace . $componentClass;
+
+                $componentName = Str::snake(Str::before($componentClass, 'Component'), '-');
+
+                Livewire::component($componentName, $object);
+            });
     }
 
     /**
