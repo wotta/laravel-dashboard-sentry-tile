@@ -5,7 +5,7 @@
             {{ $projectName }} @if($title){{ $title }}@endif
         </div>
         <div class="divide-y-2 overflow-auto">
-            @foreach($issues as $issue)
+            @foreach($this->issues as $issue)
                 <li class="overflow-hidden py-4 list-none">
                     <div class="grid gap-2">
                         <div class="grid grid-cols-auto-1 gap-2 items-center">

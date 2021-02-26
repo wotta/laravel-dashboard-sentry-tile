@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Wotta\SentryTile\Http\Livewire;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use Wotta\SentryTile\Objects\Issue;
 use Wotta\SentryTile\Models\Project;
@@ -13,20 +12,7 @@ use Wotta\SentryTile\Actions\GetLatestProjectsIssues;
 
 class SentryTileComponent extends BaseSentryComponent
 {
-    /** @var int */
-    public $refreshIntervalInSeconds;
-
-    /** @var string */
-    public $position;
-
-    /** @var string|null */
-    public $title;
-
-    /** @var ?string */
     public ?string $projectName;
-
-    /** @var bool */
-    public $showMeta;
 
     public function mount(string $position, ?bool $showMeta = false, ?string $title = null, ?int $refreshIntervalInSeconds = 900, ...$attributes): void
     {
@@ -37,12 +23,14 @@ class SentryTileComponent extends BaseSentryComponent
 
     public function render(): View
     {
-        return view('dashboard-sentry-tile-views::tile');
+        return view('dashboard-sentry-tile-views::tile', [
+            'projectName' => $this->projectName,
+        ]);
     }
 
-    public function getIssuesProperty(): Collection
+    public function getIssuesProperty()
     {
-        if (class_exists('App\Actions\GetLatestProjectsIssues')) {
+        if (! $this->projectName && class_exists('App\Actions\GetLatestProjectsIssues')) {
             return (new App\Actions\GetLatestProjectsIssues())->handle();
         }
 
