@@ -127,11 +127,8 @@ $rules = [
 
 $finder = Finder::create()
     ->path([
-        'config',
-        'database',
-        'routes',
+        'migrations',
         'src',
-        'tenancy',
         'tests',
     ])
     ->in(getcwd())
