@@ -2,6 +2,24 @@
 
 All notable changes to `sentry-dashboard-tile` will be documented in this file
 
+## 3.0.1 - 2021-03-12
+
+**Updated:**
+
+- Removed sleep from `SentryTileServiceProvider`
+
+## 3.0.0 - 2021-02-26
+
+**Added:**
+
+- Added autoloading for livewire components.
+- Moved the Livewire Http\Livewire
+- Added team component
+
+**Updated:**
+
+- Updated readme.
+
 ## 2.0.1 - 2021-02-16
 
 **Fixed:**
