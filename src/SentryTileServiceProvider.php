@@ -34,8 +34,6 @@ class SentryTileServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../migrations/' . $file->getFilename() => $this->getMigrationFileName($filesystem, Str::before($filename, '.stub')),
             ], 'dashboard-sentry-migrations');
-
-            sleep(1);
         }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'dashboard-sentry-tile-views');
