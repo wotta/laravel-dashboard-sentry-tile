@@ -1,6 +1,6 @@
 {
     "name": "wotta/sentry-dashboard-tile",
-    "description": "Get an overview of the latest issues or get the issues from a specific project.\n\n",
+    "description": "Get an overview of the latest issues or get the issues from a specific project.",
     "type": "library",
     "keywords": [
         "Laravel",
